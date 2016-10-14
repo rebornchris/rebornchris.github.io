@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+    <meta name="keywords" content="笔记," />
   
 
   <meta name="description" content="我们都知道javascript中的方法可以分为三类：
@@ -23,7 +23,7 @@
 
 
 举个例子
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950function student(name)&amp;#123;    this.name = name ;      //对象">
+12345678910111213141516171819202122232425262728function student(name)&amp;#123;    this.name = name ;      //对象方法    this.Introduce = function()&amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Javascript中的prototype">
 <meta property="og:url" content="http://rebornchris.github.io/2016/06/09/Prototype/index.html">
@@ -36,8 +36,8 @@
 
 
 举个例子
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950function student(name)&amp;#123;    this.name = name ;      //对象">
-<meta property="og:updated_time" content="2016-10-09T13:24:10.175Z">
+12345678910111213141516171819202122232425262728function student(name)&amp;#123;    this.name = name ;      //对象方法    this.Introduce = function()&amp;#123;">
+<meta property="og:updated_time" content="2016-10-14T11:31:53.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript中的prototype">
 <meta name="twitter:description" content="我们都知道javascript中的方法可以分为三类：
@@ -48,7 +48,7 @@
 
 
 举个例子
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950function student(name)&amp;#123;    this.name = name ;      //对象">
+12345678910111213141516171819202122232425262728function student(name)&amp;#123;    this.name = name ;      //对象方法    this.Introduce = function()&amp;#123;">
 
   
 
@@ -180,6 +180,11 @@
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#prototype的含义"><span class="toc-text">prototype的含义</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -206,7 +211,7 @@
       
         <span>
           <i class="icon-comment"></i>
-          <a href="http://www.forsigner.com/2016/06/09/Prototype/#disqus_thread"></a>
+          <a href="http://rebornchris.com/2016/06/09/Prototype/#disqus_thread"></a>
         </span>
       
 
@@ -223,7 +228,11 @@
 </ul>
 <hr>
 <p>举个例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">function student(name)&#123;</div><div class="line"></div><div class="line">    this.name = name ;  </div><div class="line">    //对象方法</div><div class="line"></div><div class="line">    this.Introduce = function()&#123;</div><div class="line">        alert(&quot;My name is &quot;+ this.name );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//类方法</div><div class="line"></div><div class="line">student.run = function()&#123;</div><div class="line">      alert(&quot;i am running&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原型方法</div><div class="line"></div><div class="line">student.prototype.InctroduceInChinese = function()&#123;</div><div class="line">    alert(&quot;My name is &quot;+this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//测试</div><div class="line"></div><div class="line">var p1 =  new student(&quot;xiaoming&quot;);</div><div class="line">p1.Introduce();</div><div class="line">student.run();</div><div class="line">p1.InctroduceInChinese(); </div><div class="line">``` </div><div class="line"></div><div class="line">prototype的含义</div><div class="line">---</div><div class="line">Javascript中的每个对象都有prototype属性，Javascript中对象的prototype属性的解释是：返回对象类型原型的引用。</div><div class="line"></div><div class="line">A.prototype = new B();</div><div class="line"></div><div class="line">理解prototype不应把它和继承混淆。A的prototype为B的一个实例，可以理解A将B中的方法和属性全部克隆(clone)了一遍。A能使用B的方法和属性。这里强调的是克隆而不是继承。可以出现这种情况：A的prototype是B的实例，同时B的prototype也是A的实例。</div><div class="line"></div><div class="line">```javasript</div><div class="line">function baseClass()&#123;</div><div class="line">this.showMsg = function() &#123;</div><div class="line">alert(&quot;baseClass::showMsg&quot;); </div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function extendClass()&#123;  </div><div class="line">&#125;</div><div class="line">extendClass.prototype = new baseClass();</div><div class="line">var instance = new extendClass();</div><div class="line">instance.showMsg(); // 显示baseClass::showMsg</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">function student(name)&#123;</div><div class="line"></div><div class="line">    this.name = name ;  </div><div class="line">    //对象方法</div><div class="line"></div><div class="line">    this.Introduce = function()&#123;</div><div class="line">        alert(&quot;My name is &quot;+ this.name );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//类方法</div><div class="line"></div><div class="line">student.run = function()&#123;</div><div class="line">      alert(&quot;i am running&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原型方法</div><div class="line"></div><div class="line">student.prototype.InctroduceInChinese = function()&#123;</div><div class="line">    alert(&quot;My name is &quot;+this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//测试</div><div class="line"></div><div class="line">var p1 =  new student(&quot;xiaoming&quot;);</div><div class="line">p1.Introduce();</div><div class="line">student.run();</div><div class="line">p1.InctroduceInChinese();</div></pre></td></tr></table></figure>
+<h2 id="prototype的含义"><a href="#prototype的含义" class="headerlink" title="prototype的含义"></a>prototype的含义</h2><p>Javascript中的每个对象都有prototype属性，Javascript中对象的prototype属性的解释是：返回对象类型原型的引用。</p>
+<p>A.prototype = new B();</p>
+<p>理解prototype不应把它和继承混淆。A的prototype为B的一个实例，可以理解A将B中的方法和属性全部克隆(clone)了一遍。A能使用B的方法和属性。这里强调的是克隆而不是继承。可以出现这种情况：A的prototype是B的实例，同时B的prototype也是A的实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function baseClass()&#123;</div><div class="line">this.showMsg = function() &#123;</div><div class="line">alert(&quot;baseClass::showMsg&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function extendClass()&#123;  </div><div class="line">&#125;</div><div class="line">extendClass.prototype = new baseClass();</div><div class="line">var instance = new extendClass();</div><div class="line">instance.showMsg(); // 显示baseClass::showMsg</div></pre></td></tr></table></figure>
 <p>在这里我们首先定义了baseClass类，然后又定义了extendClass类，但是我们打算以baseClass的一个实例为原型，来克隆的extendClass也同时包含showMsg这个对象方法。</p>
 <p>extendClass.prototype = new baseClass()就可以理解为：extendClass是以baseClass的一个实例为原型克隆创建的。</p>
 <hr>
@@ -238,7 +247,7 @@
 <p>好了，这里可能有人会问，为什么不用baseClass.showMsg.call(instance);</p>
 <p>这就是对象方法和类方法的区别，我们想调用的是baseClass的对象方法。</p>
 <hr>
-<p>call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。 如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。 </p>
+<p>call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。 如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。</p>
 
     
   </div>
@@ -246,26 +255,6 @@
 
 </div>
 
-
-  <div class="text-center donation">
-    <div class="inner-donation">
-      <span class="btn-donation">支持一下</span>
-      <div class="donation-body">
-        <div class="tip text-center">扫一扫，支持forsigner</div>
-        <ul class="theme.donation.items.length">
-        
-          <li class="item">
-            <img src="/images/qr-wechat.png" alt="">
-          </li>
-        
-          <li class="item">
-            <img src="/images/qr-alipay.png" alt="">
-          </li>
-        
-        </ul>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -281,7 +270,7 @@
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">

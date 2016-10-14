@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript中的this | RebornChris</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="笔记," />
+  
+
+  <meta name="description" content="在JavaScript中this的用法非常灵活，根据在不同的环境下、或者是不同函数的调用下都有不同的含义。但万变不离其宗，我们只需要记住一个原则，那就是this指的是：调用函数的那个对象
+
+全局的this(浏览器)全局作用域的this一般指向全局对象，在浏览器中这个对象就是window，而在node里面，这个全局对象指的是global。
+
+
+一般函数的this(浏览器)一般的函数声明或函数表达式，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的this">
+<meta property="og:url" content="http://rebornchris.github.io/2016/06/17/this/index.html">
+<meta property="og:site_name" content="RebornChris">
+<meta property="og:description" content="在JavaScript中this的用法非常灵活，根据在不同的环境下、或者是不同函数的调用下都有不同的含义。但万变不离其宗，我们只需要记住一个原则，那就是this指的是：调用函数的那个对象
+
+全局的this(浏览器)全局作用域的this一般指向全局对象，在浏览器中这个对象就是window，而在node里面，这个全局对象指的是global。
+
+
+一般函数的this(浏览器)一般的函数声明或函数表达式，">
+<meta property="og:image" content="https://ooo.0o0.ooo/2016/10/14/58009fa8b08c3.png">
+<meta property="og:updated_time" content="2016-10-14T11:35:04.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的this">
+<meta name="twitter:description" content="在JavaScript中this的用法非常灵活，根据在不同的环境下、或者是不同函数的调用下都有不同的含义。但万变不离其宗，我们只需要记住一个原则，那就是this指的是：调用函数的那个对象
+
+全局的this(浏览器)全局作用域的this一般指向全局对象，在浏览器中这个对象就是window，而在node里面，这个全局对象指的是global。
+
+
+一般函数的this(浏览器)一般的函数声明或函数表达式，">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2016/10/14/58009fa8b08c3.png">
+
+  
+
+  
+    <link rel="icon" href="/images/avater.jpg">
+  
+
+  <link href="/css/styles.css?v=028c63b1" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#全局的this-浏览器"><span class="toc-text">全局的this(浏览器)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般函数的this-浏览器"><span class="toc-text">一般函数的this(浏览器)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作为对象方法的函数的this"><span class="toc-text">作为对象方法的函数的this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象原型链上的this"><span class="toc-text">对象原型链上的this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数中的this"><span class="toc-text">构造函数中的this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call或apply方法与this"><span class="toc-text">call或apply方法与this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bind方法与this"><span class="toc-text">bind方法与this</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-this" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">JavaScript中的this</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.06.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>��Ф��</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://rebornchris.com/2016/06/17/this/#disqus_thread"></a>
+        </span>
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>在JavaScript中this的用法非常灵活，根据在不同的环境下、或者是不同函数的调用下都有不同的含义。但万变不离其宗，我们只需要记住一个原则，那就是this指的是：<strong>调用函数的那个对象</strong></p>
+<hr>
+<h2 id="全局的this-浏览器"><a href="#全局的this-浏览器" class="headerlink" title="全局的this(浏览器)"></a>全局的this(浏览器)</h2><p>全局作用域的<code>this</code>一般指向全局对象，在浏览器中这个对象就是<code>window</code>，而在node里面，这个全局对象指的是<code>global</code><br>。</p>
+<div align="center"><br><img src="https://ooo.0o0.ooo/2016/10/14/58009fa8b08c3.png" alt=""><br></div>
+
+<h2 id="一般函数的this-浏览器"><a href="#一般函数的this-浏览器" class="headerlink" title="一般函数的this(浏览器)"></a>一般函数的this(浏览器)</h2><p>一般的函数声明或函数表达式，如果直接调用函数的话，那么<code>this</code>依然指向全局对象，也就是<code>window</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">    return this ;</div><div class="line">&#125;</div><div class="line">test() === window ; // true</div></pre></td></tr></table></figure>
+<p>又或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">    this.a = 1 ;</div><div class="line">    alert(this.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test() ; // 1</div></pre></td></tr></table></figure>
+<p>为了证明this就是全局变量，我们可以改一下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var a = 1 ;</div><div class="line">function test()&#123;</div><div class="line">    console.log(this.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test(); // 1</div></pre></td></tr></table></figure>
+<p>又或者可以这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var  x = 1 ;</div><div class="line">function test()&#123;</div><div class="line">    this.x = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();</div><div class="line">consolo.log(x); // 2</div></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是：在严格模式下，一般函数调用的this指向undefined。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;</div><div class="line"></div><div class="line">function test()&#123;</div><div class="line">    return this;</div><div class="line">&#125;</div><div class="line"></div><div class="line">test() === undefined ; //true ;</div></pre></td></tr></table></figure>
+<h2 id="作为对象方法的函数的this"><a href="#作为对象方法的函数的this" class="headerlink" title="作为对象方法的函数的this"></a>作为对象方法的函数的this</h2><p>this作为对象方法来使用是比较常见的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var test = &#123;</div><div class="line">    a: 32,</div><div class="line">    b: function()&#123;</div><div class="line">        return this.a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">consolo.log(test.b); //32</div></pre></td></tr></table></figure>
+<p>在上面这个例子中，创建了一个对象字面量<code>test</code>, <code>test</code>里面有一个属性b，它的值是一个函数对象，把函数作为对象属性的值这种方式我们常常叫作对象的方法。作为对象方法调用时，这个时候<code>this</code>指向对象<code>test</code>。</p>
+<p>当然我们也可以不用这么去创建对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = &#123;b: 23&#125;;</div><div class="line">function test()&#123;</div><div class="line">    return this.b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">a.c = test;</div><div class="line">console.log(a.c()); // 23 ;</div></pre></td></tr></table></figure></p>
+<p>在这里我们只定义了对象a，对象a里面有一个变量b，如果直接调用<code>test()</code>函数的话，this会指向window，但是我们通过赋值的方式，临时创建一个属性c,并指向函数对象的时候，我们仍然拿到了23。</p>
+<p>所以，并不是看函数是怎么创建的，而是只要将函数作为对象的方法去调用，this就会指向这个对象。</p>
+<h2 id="对象原型链上的this"><a href="#对象原型链上的this" class="headerlink" title="对象原型链上的this"></a>对象原型链上的this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var o = &#123;</div><div class="line">    f:function()&#123;</div><div class="line">        return this.a + this.b;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var n = Object.create(o);</div><div class="line">n.a = 1;</div><div class="line">n.b = 2;</div><div class="line">console.log(n.f()); //3</div></pre></td></tr></table></figure>
+<p>在这个例子中:我们先创建了一个对象o,里面有一个属性f,函数作为对象属性的值，我们通过Object.create(o)创建了一个对象n,n是一个空对象，它的原型会指向o,然后使用n.a = 1; n.b = 4创建对象n上的属性，那么我们调用原型上的方法时，this.a,this.b依然能取到对象n上的a和b。这里需要注意的是<strong>n的原型才是o，我们调用n.f()，调用的是原型链o上的属性f，原型链上的this可以拿到当前的对象n。</strong></p>
+<p>突然想到new Object()和Object.create()的区别，查看资料后发现：</p>
+<blockquote>
+<p>简单来讲，new Object()是一种通过构造函数来创建object的方式，而Object.create(proto, [ propertiesObject ])<br>不需要通过构造函数就可以创建一个object，Object.create()的第一个参数是必须要的，第二个参数可选。其实Object.create()内部依然是通过new一个构造函数的方式来实现的，它有构造函数，不过这个构造函数是隐式存在的。</p>
+</blockquote>
+<h2 id="构造函数中的this"><a href="#构造函数中的this" class="headerlink" title="构造函数中的this"></a>构造函数中的this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">    this.a = 32;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var o = new test();</div><div class="line">console.log(o.a); //32</div><div class="line"></div><div class="line">function test()&#123;</div><div class="line">    this.a =32;</div><div class="line">    return &#123;a: 33&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var o = new test();</div><div class="line">console.log(o.a); //33</div></pre></td></tr></table></figure>
+<p>用new把test作为构造函数调用的话，this会指向空的对象，并且这个对象的原型会指向test.prototype,但是调用的时候做了this.a = 32的赋值,所以最后this会作为返回值(没写return语句,或者return的是基本类型的话,会将this作为返回值)，第二个例子return语句返回了对象，那么就会将a = 33作为返回值。</p>
+<h2 id="call或apply方法与this"><a href="#call或apply方法与this" class="headerlink" title="call或apply方法与this"></a>call或apply方法与this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function add(c, d)&#123;  </div><div class="line">   return this.a + this.b + c + d;  </div><div class="line">&#125;</div><div class="line">var o = &#123;a:1, b:3&#125;;</div><div class="line">add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16     //第一个参数接收的是你想作为this的对象</div><div class="line">add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34</div><div class="line"></div><div class="line">function bar() &#123;  </div><div class="line">   console.log(Object.prototype.toString.call(this));</div><div class="line">&#125;</div><div class="line">bar.call(7);</div></pre></td></tr></table></figure>
+<p>除了不同的调用方式外，函数对象有些方法能修改函数执行的this，比如call/apply。</p>
+<p>call和apply基本上没差别，只不过call传参的方式是扁平的，而apply是把一个数组传进去。如下面这个例子</p>
+<p>什么时候用call和apply呢？比如我们想调用Object.prototype.toString,但是我们想指定某个this的时候，那我们就可以就用Object.prototype.toString.call(this)这样子的方式来调用些无法直接调用的方法。</p>
+<h2 id="bind方法与this"><a href="#bind方法与this" class="headerlink" title="bind方法与this"></a>bind方法与this</h2><p>bind方法是es5开始提供的，所以ie9+才支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function f()&#123;  </div><div class="line">   return this.a;  </div><div class="line">&#125;</div><div class="line"></div><div class="line">var g = f.bind(&#123;a : &quot;test&quot;&#125;);   //想把某个对象作为this的时候，就把它传进去，得到一个新对象g</div><div class="line">console.log(g()); // test       </div><div class="line"></div><div class="line">//重复调用的时候，this已经指向bind参数。这对于我们绑定一次需要重复调用依然实现绑定的话，会比apply和call更加高效（看下面这个例子）</div><div class="line"></div><div class="line">var o = &#123;a : 37, f : f, g : g&#125;;  </div><div class="line">console.log(o.f(), o.g()); // 37, test</div></pre></td></tr></table></figure>
+<p>o.f()通过对象的属性调用，this指向对象o;比较特殊的是即使我们把新绑定的方法作为对象的属性调用，o.g()依然会按之前的绑定去走，所以答案是test不是g</p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://rebornchris.github.io/2016/06/17/this/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
